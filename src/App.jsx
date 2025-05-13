@@ -13,13 +13,13 @@ const App = () => {
   useEffect(() => {
     client.getEntries({
       content_type: 'portfolioProjects',
-      order: '-sys.createdAt', // Corrected to use sys.createdAt
+      order: '-sys.createdAt', // Most recent first
     })
       .then(response => {
         const fetchedProjects = response.items;
         setProjects(fetchedProjects);
-        
-        // Set the most recent project as featured
+
+        // Feature the most recent project
         if (fetchedProjects.length > 0) {
           setFeaturedProject(fetchedProjects[0]);
         }
@@ -29,15 +29,13 @@ const App = () => {
 
   return (
     <div className={`${darkMode ? 'bg-zinc-900 text-white' : 'bg-zinc-300 text-zinc-900'} transition-colors duration-300 min-h-screen`}>
-  
-      {/* Top Bar Wrapper (full width, inherits theme) */}
+
+      {/* Fixed top bar background */}
       <div className={`fixed top-0 left-0 w-full h-16 z-40 ${darkMode ? 'bg-zinc-800' : 'bg-zinc-200'} shadow-md transition-colors duration-300`}></div>
-  
-      {/* Dark Mode Toggle */}
+
+      {/* Dark mode toggle (top left) */}
       <div className="fixed top-4 left-4 z-50 flex items-center px-3 py-1 bg-zinc-300 dark:bg-zinc-700 rounded-full shadow-lg">
         <span className="mr-2">🌞</span>
-        
-        {/* Custom Switch */}
         <label className="switch">
           <input
             type="checkbox"
@@ -46,11 +44,10 @@ const App = () => {
           />
           <span className="slider"></span>
         </label>
-
         <span className="ml-2">🌙</span>
       </div>
-  
-      {/* Menu Button */}
+
+      {/* Dropdown menu (top right) */}
       <div className="fixed top-2 right-4 z-50">
         <button
           onClick={() => setMenuOpen(!menuOpen)}
@@ -83,12 +80,12 @@ const App = () => {
           </div>
         )}
       </div>
-  
-      {/* Main Content Wrapper */}
+
+      {/* Main layout */}
       <main className="pt-20 pb-10 px-4">
         <div className="max-w-screen-xl mx-auto space-y-16">
-  
-          {/* Featured Project */}
+
+          {/* Featured project section */}
           {featuredProject && (
             <section className={`${darkMode ? 'bg-mist-grey text-midnight-black' : 'bg-zinc-900 text-white'} p-8 rounded-xl shadow-lg`}>
               <img
@@ -118,16 +115,16 @@ const App = () => {
               </div>
             </section>
           )}
-  
-          {/* About Me Section */}
+
+          {/* About me section */}
           <section className={`${darkMode ? 'bg-mist-grey text-midnight-black' : 'bg-zinc-900 text-white'} p-8 rounded-xl shadow-lg`}>
             <h2 className="text-3xl font-bold mb-4">About Me</h2>
             <p className="text-lg">
               I’m a software developer who loves building games, websites, and creative projects.
             </p>
           </section>
-  
-          {/* Other Projects */}
+
+          {/* Grid of additional projects */}
           <section>
             <h2 className="text-3xl font-bold mb-6">Other Projects</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
