@@ -1,5 +1,16 @@
 @import "tailwindcss";
 
+@theme {
+  --color-deep-ocean-blue: #003B5C;
+  --color-ancient-gold: #C8A300;
+  --color-ghostly-white: #F2F6F6;
+  --color-abyssal-purple: #6A3D94;
+  --color-cursed-red: #B13F35;
+  --color-rusty-bronze: #7A5C3F;
+  --color-midnight-black: #1D1D1D;
+  --color-mist-grey: #A8A8A8;
+}
+
 /* Add this to your styles.css or App.css to style the toggle */
 .switch {
   position: relative;
@@ -22,7 +33,7 @@
   right: 0;
   bottom: 0;
   background-color: #ccc;
-  transition: 0.4s;
+  transition: background-color 0.4s ease, transform 0.4s ease;
   border-radius: 50px;
 }
 
@@ -35,11 +46,11 @@
   left: 4px;
   bottom: 4px;
   background-color: white;
-  transition: 0.4s;
+  transition: transform 0.4s ease;
 }
 
 input:checked + .slider {
-  background-color: #4CAF50;
+  background-color: #797979dd;
 }
 
 input:checked + .slider:before {

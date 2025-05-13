@@ -28,86 +28,116 @@ const App = () => {
   }, []);
 
   return (
-    <div className={`${darkMode ? 'bg-black text-white' : 'bg-white text-black'} transition-all`}>
-
-      {/* Dark Mode / Light Mode Toggle */}
-      <div className="fixed top-4 left-4 flex items-center border-black border-2 rounded-4xl bg-gray-500">
+    <div className={`${darkMode ? 'bg-zinc-900 text-white' : 'bg-zinc-300 text-zinc-900'} transition-colors duration-300 min-h-screen`}>
+  
+      {/* Top Bar Wrapper (full width, inherits theme) */}
+      <div className={`fixed top-0 left-0 w-full h-16 z-40 ${darkMode ? 'bg-zinc-800' : 'bg-zinc-200'} shadow-md transition-colors duration-300`}></div>
+  
+      {/* Dark Mode Toggle */}
+      <div className="fixed top-4 left-4 z-50 flex items-center px-3 py-1 bg-zinc-300 dark:bg-zinc-700 rounded-full shadow-lg">
         <span className="mr-2">🌞</span>
+        
+        {/* Custom Switch */}
         <label className="switch">
           <input
             type="checkbox"
             checked={darkMode}
             onChange={toggleDarkMode}
-            className="hidden"
           />
-          <span className="slider round"></span>
+          <span className="slider"></span>
         </label>
+
         <span className="ml-2">🌙</span>
       </div>
-
+  
       {/* Menu Button */}
-      <div className="fixed top-4 right-4">
+      <div className="fixed top-2 right-4 z-50">
         <button
           onClick={() => setMenuOpen(!menuOpen)}
-          className="p-3 bg-blue-500 text-white rounded-full shadow-lg focus:outline-none hover:bg-blue-600 transition-colors"
+          className="p-3 bg-indigo-600 text-white rounded-full shadow-lg hover:bg-indigo-700 transition"
         >
           ☰
         </button>
         {menuOpen && (
-          <div className="absolute right-0 mt-2 bg-gray-800 text-white rounded-md shadow-lg">
-            <ul className="p-4">
-              <li><a href="https://github.com/Stephen-T-2023" target="_blank" className="block p-2 hover:bg-gray-700">Github</a></li>
-              <li><a href="https://www.linkedin.com/in/stephen-t-131039286/" target="_blank" className="block p-2 hover:bg-gray-700">LinkedIn</a></li>
+          <div className={`absolute right-0 mt-2 w-44 rounded-lg shadow-xl z-50 transition-colors duration-300 ${darkMode ? 'bg-zinc-800 text-white' : 'bg-white text-zinc-900 border border-zinc-300'}`}>
+            <ul className="p-2">
+              <li>
+                <a
+                  href="https://github.com/Stephen-T-2023"
+                  target="_blank"
+                  className="block px-4 py-2 rounded hover:bg-indigo-100 dark:hover:bg-zinc-700"
+                >
+                  GitHub
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://www.linkedin.com/in/stephen-t-131039286/"
+                  target="_blank"
+                  className="block px-4 py-2 rounded hover:bg-indigo-100 dark:hover:bg-zinc-700"
+                >
+                  LinkedIn
+                </a>
+              </li>
             </ul>
           </div>
         )}
       </div>
-
-      {/* Featured Project */}
-      {featuredProject && (
-        <section className="featured-project p-8 bg-gray-800 text-white">
-          <img
-            src={featuredProject.fields.image.fields.file.url}
-            alt={featuredProject.fields.title}
-            className="w-full h-64 object-cover"
-          />
-          <h2 className="text-4xl mt-4">{featuredProject.fields.title}</h2>
-          <p>{featuredProject.fields.description}</p>
-          <div className="mt-4">
-            <a
-              href={featuredProject.fields.githubLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mr-4 px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
-            >
-              GitHub
-            </a>
-            <a
-              href={featuredProject.fields.liveLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-6 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors"
-            >
-              Live Site
-            </a>
-          </div>
-        </section>
-      )}
-
-      {/* About Me Section */}
-      <section className="about p-8">
-        <h2 className="text-3xl mb-4">About Me</h2>
-        <p>
-          I’m a software developer who loves building games, websites, and creative projects.
-        </p>
-      </section>
-
-      {/* Other Projects */}
-      <section className="other-projects grid grid-cols-1 md:grid-cols-3 gap-8 p-8">
-        {projects.slice(1).map(({ fields, sys }) => (
-          <ProjectCard key={sys.id} fields={fields} />
-        ))}
-      </section>
+  
+      {/* Main Content Wrapper */}
+      <main className="pt-20 pb-10 px-4">
+        <div className="max-w-screen-xl mx-auto space-y-16">
+  
+          {/* Featured Project */}
+          {featuredProject && (
+            <section className={`${darkMode ? 'bg-mist-grey text-midnight-black' : 'bg-zinc-900 text-white'} p-8 rounded-xl shadow-lg`}>
+              <img
+                src={featuredProject.fields.image.fields.file.url}
+                alt={featuredProject.fields.title}
+                className="w-full h-64 object-cover rounded-lg"
+              />
+              <h2 className="text-4xl font-semibold mt-6">{featuredProject.fields.title}</h2>
+              <p className="mt-2 text-lg">{featuredProject.fields.description}</p>
+              <div className="mt-6 flex gap-4">
+                <a
+                  href={featuredProject.fields.githubLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-5 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition"
+                >
+                  GitHub
+                </a>
+                <a
+                  href={featuredProject.fields.liveLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-5 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition"
+                >
+                  Live Site
+                </a>
+              </div>
+            </section>
+          )}
+  
+          {/* About Me Section */}
+          <section className={`${darkMode ? 'bg-mist-grey text-midnight-black' : 'bg-zinc-900 text-white'} p-8 rounded-xl shadow-lg`}>
+            <h2 className="text-3xl font-bold mb-4">About Me</h2>
+            <p className="text-lg">
+              I’m a software developer who loves building games, websites, and creative projects.
+            </p>
+          </section>
+  
+          {/* Other Projects */}
+          <section>
+            <h2 className="text-3xl font-bold mb-6">Other Projects</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {projects.slice(1).map(({ fields, sys }) => (
+                <ProjectCard key={sys.id} fields={fields} />
+              ))}
+            </div>
+          </section>
+        </div>
+      </main>
     </div>
   );
 };
