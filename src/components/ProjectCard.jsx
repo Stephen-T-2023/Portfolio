@@ -39,7 +39,7 @@ const ProjectCard = ({ fields }) => {
               GitHub
             </a>
           )}
-          {liveLink && (
+          {liveLink && liveLink.trim().length > 0 && (
             <a
               href={liveLink}
               target="_blank"

@@ -104,14 +104,16 @@ const App = () => {
                 >
                   GitHub
                 </a>
-                <a
-                  href={featuredProject.fields.liveLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-5 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition"
-                >
-                  Live Site
-                </a>
+                {featuredProject.fields.liveLink?.trim().length > 0 && (
+                  <a
+                    href={featuredProject.fields.liveLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-5 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition"
+                  >
+                    Live Site
+                  </a>
+                )}
               </div>
             </section>
           )}
